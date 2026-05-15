@@ -9,3 +9,6 @@ spring:
   flyway:
     enabled: true
     locations: classpath:db/migration
+logging:
+  level:
+    org.springframework.jdbc.core: INFO # DEBUG にすると実行されているSQLが出力される
