@@ -15,4 +15,9 @@ public class UserRepository {
   public List<User> findAll() {
     return userDao.findAllByOrderByIdAsc();
   }
+
+  public List<User> findByName(String name) {
+    String namePattern = "%" + name + "%";
+    return userDao.findByNameContaining(namePattern);
+  }
 }

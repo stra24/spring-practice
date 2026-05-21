@@ -19,4 +19,11 @@ public class UserService {
         .map(UserDto::from)
         .toList();
   }
+
+  @Transactional(readOnly = true)
+  public List<UserDto> findByName(String name) {
+    return userRepository.findByName(name).stream()
+        .map(UserDto::from)
+        .toList();
+  }
 }
