@@ -14,4 +14,8 @@ public record User(
     LocalDateTime updatedAt
 ) {
 
+  public static User create(String name, String email) {
+    LocalDateTime now = LocalDateTime.now();
+    return new User(null, name, email, now, now);
+  }
 }

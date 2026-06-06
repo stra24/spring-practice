@@ -25,4 +25,8 @@ public class UserRepository {
   public Optional<User> findById(Long id) {
     return userDao.findById(id);
   }
+
+  public User save(User user) {
+    return userDao.save(user);
+  }
 }
