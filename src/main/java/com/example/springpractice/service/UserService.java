@@ -52,4 +52,11 @@ public class UserService {
     User updatedUser = existingUser.update(request.name(), request.email());
     return UserDto.from(userRepository.save(updatedUser));
   }
+
+  @Transactional
+  public void delete(Long id) {
+    userRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("User", String.valueOf(id)));
+    userRepository.deleteById(id);
+  }
 }

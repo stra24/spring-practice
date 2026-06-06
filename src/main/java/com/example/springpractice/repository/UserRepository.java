@@ -29,4 +29,8 @@ public class UserRepository {
   public User save(User user) {
     return userDao.save(user);
   }
+
+  public void deleteById(Long id) {
+    userDao.deleteById(id);
+  }
 }
