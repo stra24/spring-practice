@@ -2,6 +2,7 @@ package com.example.springpractice.service;
 
 import com.example.springpractice.dto.UserCreateRequest;
 import com.example.springpractice.dto.UserDto;
+import com.example.springpractice.dto.UserUpdateRequest;
 import com.example.springpractice.entity.User;
 import com.example.springpractice.exception.ResourceNotFoundException;
 import com.example.springpractice.repository.UserRepository;
@@ -42,5 +43,13 @@ public class UserService {
     User user = User.create(request.name(), request.email());
     User savedUser = userRepository.save(user);
     return UserDto.from(savedUser);
+  }
+
+  @Transactional
+  public UserDto update(Long id, UserUpdateRequest request) {
+    User existingUser = userRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("User", String.valueOf(id)));
+    User updatedUser = existingUser.update(request.name(), request.email());
+    return UserDto.from(userRepository.save(updatedUser));
   }
 }

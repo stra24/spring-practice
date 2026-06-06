@@ -18,4 +18,8 @@ public record User(
     LocalDateTime now = LocalDateTime.now();
     return new User(null, name, email, now, now);
   }
+
+  public User update(String name, String email) {
+    return new User(this.id, name, email, this.createdAt, LocalDateTime.now());
+  }
 }
