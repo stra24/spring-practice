@@ -5,6 +5,7 @@ import com.example.springpractice.service.UserService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,5 +20,10 @@ public class UserController {
   @GetMapping
   public List<UserDto> searchUsers(@RequestParam(defaultValue = "") String name) {
     return userService.findByName(name);
+  }
+
+  @GetMapping("/{id}")
+  public UserDto findById(@PathVariable Long id) {
+    return userService.findById(id);
   }
 }
