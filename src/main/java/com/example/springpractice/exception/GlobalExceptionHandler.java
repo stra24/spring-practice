@@ -37,4 +37,16 @@ public class GlobalExceptionHandler {
     });
     return new ErrorResponse("入力値が不正です", paramErrors);
   }
+
+  @ExceptionHandler(ResourceNotFoundException.class)
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  public ErrorResponse handleResourceNotFound(ResourceNotFoundException ex) {
+    return new ErrorResponse(ex.getMessage(), null);
+  }
+
+  @ExceptionHandler(Exception.class)
+  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+  public ErrorResponse handleException(Exception ex) {
+    return new ErrorResponse("サーバーエラーが発生しました", null);
+  }
 }
