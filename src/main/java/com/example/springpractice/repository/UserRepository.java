@@ -2,6 +2,7 @@ package com.example.springpractice.repository;
 
 import com.example.springpractice.dao.UserDao;
 import com.example.springpractice.entity.User;
+import com.example.springpractice.row.UserHobbyRow;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,10 @@ public class UserRepository {
 
   public Optional<User> findByIdForUpdate(Long id) {
     return userDao.findByIdForUpdate(id);
+  }
+
+  public List<UserHobbyRow> findDetailRowsById(Long id) {
+    return userDao.findDetailRowsById(id);
   }
 
   public User save(User user) {

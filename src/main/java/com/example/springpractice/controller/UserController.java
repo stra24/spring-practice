@@ -1,6 +1,7 @@
 package com.example.springpractice.controller;
 
 import com.example.springpractice.dto.UserCreateRequest;
+import com.example.springpractice.dto.UserDetailDto;
 import com.example.springpractice.dto.UserDto;
 import com.example.springpractice.dto.UserUpdateRequest;
 import com.example.springpractice.service.UserService;
@@ -33,7 +34,7 @@ public class UserController {
   }
 
   @GetMapping("/{id}")
-  public UserDto findById(@PathVariable @Min(1) Long id) {
+  public UserDetailDto findById(@PathVariable @Min(1) Long id) {
     return userService.findById(id);
   }
 
