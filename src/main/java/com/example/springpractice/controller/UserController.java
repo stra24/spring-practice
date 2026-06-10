@@ -54,4 +54,9 @@ public class UserController {
   public void delete(@PathVariable @Min(1) Long id) {
     userService.delete(id);
   }
+
+  @PostMapping("/rollback-test")
+  public void createAndThrow(@RequestBody @Valid UserCreateRequest request) {
+    userService.createAndThrow(request);
+  }
 }

@@ -59,4 +59,11 @@ public class UserService {
         .orElseThrow(() -> new ResourceNotFoundException("User", String.valueOf(id)));
     userRepository.deleteById(id);
   }
+
+  @Transactional
+  public void createAndThrow(UserCreateRequest request) {
+    User user = User.create(request.name(), request.email());
+    userRepository.save(user);
+    throw new RuntimeException("ロールバック確認用の例外");
+  }
 }
