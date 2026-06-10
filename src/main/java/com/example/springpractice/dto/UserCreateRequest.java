@@ -1,8 +1,11 @@
 package com.example.springpractice.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 public record UserCreateRequest(
-    String name,
-    String email
+    @NotBlank String name,
+    @NotBlank @Email String email
 ) {
 
 }

@@ -4,6 +4,8 @@ import com.example.springpractice.dto.UserCreateRequest;
 import com.example.springpractice.dto.UserDto;
 import com.example.springpractice.dto.UserUpdateRequest;
 import com.example.springpractice.service.UserService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,24 +33,25 @@ public class UserController {
   }
 
   @GetMapping("/{id}")
-  public UserDto findById(@PathVariable Long id) {
+  public UserDto findById(@PathVariable @Min(1) Long id) {
     return userService.findById(id);
   }
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public UserDto create(@RequestBody UserCreateRequest request) {
+  public UserDto create(@RequestBody @Valid UserCreateRequest request) {
     return userService.create(request);
   }
 
   @PutMapping("/{id}")
-  public UserDto update(@PathVariable Long id, @RequestBody UserUpdateRequest request) {
+  public UserDto update(@PathVariable @Min(1) Long id,
+      @RequestBody @Valid UserUpdateRequest request) {
     return userService.update(id, request);
   }
 
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void delete(@PathVariable Long id) {
+  public void delete(@PathVariable @Min(1) Long id) {
     userService.delete(id);
   }
 }
