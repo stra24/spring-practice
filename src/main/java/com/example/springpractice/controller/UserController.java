@@ -49,14 +49,16 @@ public class UserController {
     return userService.update(id, request);
   }
 
+  @PutMapping("/{id}/slow-update")
+  public UserDto updateSlow(
+      @PathVariable @Min(1) Long id,
+      @RequestBody @Valid UserUpdateRequest request) {
+    return userService.updateSlow(id, request);
+  }
+
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void delete(@PathVariable @Min(1) Long id) {
     userService.delete(id);
-  }
-
-  @PostMapping("/rollback-test")
-  public void createAndThrow(@RequestBody @Valid UserCreateRequest request) {
-    userService.createAndThrow(request);
   }
 }

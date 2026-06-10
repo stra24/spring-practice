@@ -26,6 +26,10 @@ public class UserRepository {
     return userDao.findById(id);
   }
 
+  public Optional<User> findByIdForUpdate(Long id) {
+    return userDao.findByIdForUpdate(id);
+  }
+
   public User save(User user) {
     return userDao.save(user);
   }

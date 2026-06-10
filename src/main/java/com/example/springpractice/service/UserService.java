@@ -47,9 +47,22 @@ public class UserService {
 
   @Transactional
   public UserDto update(Long id, UserUpdateRequest request) {
-    User existingUser = userRepository.findById(id)
+    User existingUser = userRepository.findByIdForUpdate(id)
         .orElseThrow(() -> new ResourceNotFoundException("User", String.valueOf(id)));
     User updatedUser = existingUser.update(request.name(), request.email());
+    return UserDto.from(userRepository.save(updatedUser));
+  }
+
+  @Transactional
+  public UserDto updateSlow(Long id, UserUpdateRequest request) {
+    User existingUser = userRepository.findByIdForUpdate(id)
+        .orElseThrow(() -> new ResourceNotFoundException("User", String.valueOf(id)));
+    User updatedUser = existingUser.update(request.name(), request.email());
+    try {
+      Thread.sleep(5000);
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+    }
     return UserDto.from(userRepository.save(updatedUser));
   }
 
@@ -58,12 +71,5 @@ public class UserService {
     userRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("User", String.valueOf(id)));
     userRepository.deleteById(id);
-  }
-
-  @Transactional
-  public void createAndThrow(UserCreateRequest request) {
-    User user = User.create(request.name(), request.email());
-    userRepository.save(user);
-    throw new RuntimeException("ロールバック確認用の例外");
   }
 }
