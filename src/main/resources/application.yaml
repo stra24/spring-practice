@@ -2,9 +2,12 @@ spring:
   application:
     name: spring-practice
   datasource:
-    url: jdbc:postgresql://localhost:5432/user_management_db
-    username: postgres
-    password: password  # ← インストール時に設定したパスワードに変更してください
+    # url: jdbc:postgresql://localhost:5432/user_management_db
+    # username: postgres
+    # password: password  # ← インストール時に設定したパスワードに変更してください
+    url: ${SPRING_DATASOURCE_URL}  # ← DBのURL
+    username: ${SPRING_DATASOURCE_USERNAME}  # ← DBのログインユーザー
+    password: ${SPRING_DATASOURCE_PASSWORD}  # ← DBのログインパスワード
     driver-class-name: org.postgresql.Driver
   flyway:
     enabled: true
